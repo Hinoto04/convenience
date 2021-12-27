@@ -20,8 +20,6 @@ class Farmer : Listener {
         arrayOf(Material.NETHER_WART, Material.NETHER_WART)
     )
 
-
-
     //블럭 파괴 이벤트
     @EventHandler
     fun onBlockDropItem(e: BlockDropItemEvent) {
@@ -36,6 +34,4 @@ class Farmer : Listener {
             }
         }
     }
-
-
 }

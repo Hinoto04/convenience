@@ -10,7 +10,7 @@ import org.bukkit.event.block.BlockDropItemEvent
 
 class Farmer : Listener {
 
-    //방향 상관없는 작물
+    //작물 리스트
     private val checkList = arrayOf(
         arrayOf(Material.WHEAT, Material.WHEAT_SEEDS),
         arrayOf(Material.POTATOES, Material.POTATO),
@@ -20,7 +20,7 @@ class Farmer : Listener {
         arrayOf(Material.NETHER_WART, Material.NETHER_WART)
     )
 
-    //블럭 파괴 이벤트
+    //수확 시 작동
     @EventHandler
     fun onBlockDropItem(e: BlockDropItemEvent) {
         for(m in checkList) {
@@ -29,6 +29,7 @@ class Farmer : Listener {
                 if(inv.itemInOffHand.type == m[1]) {
                     inv.itemInOffHand.amount--
                     e.block.type = m[0]
+                    //방향 바뀌는 문제로 인해, 블럭 자체를 복사해 나이만 수정
                     e.block.blockData = (e.blockState.blockData as Ageable).apply { age = 0; }
                 }
             }

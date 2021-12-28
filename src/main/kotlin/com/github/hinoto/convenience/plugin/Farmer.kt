@@ -1,12 +1,13 @@
 package com.github.hinoto.convenience.plugin
 
+import net.kyori.adventure.text.Component
 import org.bukkit.Material
 import org.bukkit.block.data.Ageable
-import org.bukkit.block.data.Directional
-import org.bukkit.block.data.type.Cocoa
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
+import org.bukkit.event.block.Action
 import org.bukkit.event.block.BlockDropItemEvent
+import org.bukkit.event.player.PlayerInteractEvent
 
 class Farmer : Listener {
 
@@ -33,6 +34,18 @@ class Farmer : Listener {
                     e.block.blockData = (e.blockState.blockData as Ageable).apply { age = 0; }
                 }
             }
+        }
+    }
+
+    //상호작용 이벤트 (퇴비통 사용 관련)
+    @EventHandler
+    fun onInteractBlock(e: PlayerInteractEvent) {
+        if(e.action == Action.RIGHT_CLICK_BLOCK &&
+                e.hasBlock() &&
+                e.clickedBlock?.type == Material.COMPOSTER &&
+                e.hasItem() &&
+                e.item?.type == Material.POISONOUS_POTATO) {
+
         }
     }
 }

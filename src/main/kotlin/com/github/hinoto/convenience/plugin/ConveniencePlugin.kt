@@ -10,11 +10,16 @@ class ConveniencePlugin : JavaPlugin() {
     override fun onEnable() {
         logger.info("Convenience Plugin Enabled")
 
+        val pm = Bukkit.getPluginManager()
+
         //농사 관련 편의성 개선
-        Bukkit.getPluginManager().registerEvents(Farmer(), this)
+        pm.registerEvents(Farmer(), this)
 
         //레시피 관련 편의성 개선
-        Bukkit.getPluginManager().registerEvents(recipe.RecipeAdder(), this)
+        pm.registerEvents(recipe.RecipeAdder(), this)
+
+        //기능성 아이템 관련 편의성 개선
+        pm.registerEvents(FunctionItem(), this)
         recipe.addRecipe()
     }
 

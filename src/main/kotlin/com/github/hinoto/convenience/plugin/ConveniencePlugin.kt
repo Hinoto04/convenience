@@ -17,10 +17,10 @@ class ConveniencePlugin : JavaPlugin() {
 
         //레시피 관련 편의성 개선
         pm.registerEvents(recipe.RecipeAdder(), this)
+        recipe.addRecipe()
 
         //기능성 아이템 관련 편의성 개선
         pm.registerEvents(FunctionItem(), this)
-        recipe.addRecipe()
     }
 
     override fun onDisable() {

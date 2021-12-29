@@ -8,28 +8,35 @@ import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerJoinEvent
-import org.bukkit.inventory.ItemStack
-import org.bukkit.inventory.RecipeChoice
-import org.bukkit.inventory.ShapedRecipe
+import org.bukkit.inventory.*
 import org.bukkit.plugin.java.JavaPlugin
 
 class Recipe(private val plugin: JavaPlugin) {
 
-    private val enableRecipes = listOf(
+    private val enableShapedRecipes = listOf(
         getPackedIce(),
         getSaddle(),
         getNameTag(),
         getEnchantedGoldenApple(),
+    )
+    private val enableShapelessRecipe = listOf(
+        getChippedAnvil(),
+        getAnvil()
     )
     private val enableItem = listOf(
         "packed_ice",
         "saddle",
         "name_tag",
         "enchanted_golden_apple",
+        "chipped_anvil",
+        "anvil"
     )
 
     fun addRecipe() {
-        for(recipe in enableRecipes) {
+        for(recipe in enableShapedRecipes) {
+            Bukkit.getServer().addRecipe(recipe)
+        }
+        for(recipe in enableShapelessRecipe) {
             Bukkit.getServer().addRecipe(recipe)
         }
     }
@@ -80,6 +87,24 @@ class Recipe(private val plugin: JavaPlugin) {
         recipe.shape("GGG", "GAG", "GGG")
         recipe.setIngredient('G', Material.GOLD_BLOCK)
         recipe.setIngredient('A', Material.APPLE)
+        return recipe
+    }
+
+    private fun getChippedAnvil(): ShapelessRecipe {
+        val item = ItemStack(Material.CHIPPED_ANVIL)
+        val key = NamespacedKey(this.plugin, "chipped_anvil")
+        val recipe = ShapelessRecipe(key, item)
+        recipe.addIngredient(Material.DAMAGED_ANVIL)
+        recipe.addIngredient(Material.IRON_INGOT)
+        return recipe
+    }
+
+    private fun getAnvil(): ShapelessRecipe {
+        val item = ItemStack(Material.ANVIL)
+        val key = NamespacedKey(this.plugin, "anvil")
+        val recipe = ShapelessRecipe(key, item)
+        recipe.addIngredient(Material.CHIPPED_ANVIL)
+        recipe.addIngredient(Material.IRON_INGOT)
         return recipe
     }
 

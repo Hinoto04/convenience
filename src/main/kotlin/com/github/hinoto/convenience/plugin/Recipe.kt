@@ -21,7 +21,8 @@ class Recipe(private val plugin: JavaPlugin) {
     )
     private val enableShapelessRecipe = listOf(
         getChippedAnvil(),
-        getAnvil()
+        getAnvil(),
+        getMycelium(),
     )
     private val enableItem = listOf(
         "packed_ice",
@@ -29,7 +30,8 @@ class Recipe(private val plugin: JavaPlugin) {
         "name_tag",
         "enchanted_golden_apple",
         "chipped_anvil",
-        "anvil"
+        "anvil",
+        "mycelium"
     )
 
     fun addRecipe() {
@@ -105,6 +107,15 @@ class Recipe(private val plugin: JavaPlugin) {
         val recipe = ShapelessRecipe(key, item)
         recipe.addIngredient(Material.CHIPPED_ANVIL)
         recipe.addIngredient(Material.IRON_INGOT)
+        return recipe
+    }
+    //균사체
+    private fun getMycelium(): ShapelessRecipe {
+        val item = ItemStack(Material.MYCELIUM)
+        val key = NamespacedKey(this.plugin, "mycelium")
+        val recipe = ShapelessRecipe(key, item)
+        recipe.addIngredient(Material.ROTTEN_FLESH)
+        recipe.addIngredient(Material.GRASS_BLOCK)
         return recipe
     }
 

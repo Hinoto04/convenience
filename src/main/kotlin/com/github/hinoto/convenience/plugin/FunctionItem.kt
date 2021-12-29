@@ -3,7 +3,9 @@ package com.github.hinoto.convenience.plugin
 import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
 import org.bukkit.Material
+import org.bukkit.Sound
 import org.bukkit.World
+import org.bukkit.block.data.Directional
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.Action
@@ -12,7 +14,7 @@ import java.text.DecimalFormat
 
 class FunctionItem : Listener {
 
-    val server = Bukkit.getServer()
+    private val server = Bukkit.getServer()
 
     @EventHandler
     fun onPlayerInteract(e: PlayerInteractEvent) {

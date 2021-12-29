@@ -21,41 +21,45 @@ class FunctionItem : Listener {
 
         val p = e.player
 
-        //공기 중 우클릭 조건
-        if(e.action == Action.RIGHT_CLICK_AIR) {
+        //나침반 : 현재 위치 공유
+        if(p.inventory.itemInMainHand.type == Material.COMPASS &&
+                e.action == Action.RIGHT_CLICK_AIR &&
+                !p.hasCooldown(Material.COMPASS)) {
+            var str = "<" + e.player.name + "> "
 
-            //나침반 : 현재 위치 공유
-            if(p.inventory.itemInMainHand.type == Material.COMPASS) {
-                var str = "<" + e.player.name + "> "
-
-                if(p.world.environment == World.Environment.NORMAL) {
-                    str += "Overworld"
-                } else if(p.world.environment == World.Environment.NETHER) {
-                    str += "Nether"
-                } else if(p.world.environment == World.Environment.THE_END) {
-                    str += "The End"
-                } else {
-                    str += "Custom"
-                }
-                str += ' '
-                str += p.location.blockX.toString() + ' ' +
-                        p.location.blockY.toString() + ' ' +
-                        p.location.blockZ.toString()
-
-                server.broadcast(Component.text(str))
+            if(p.world.environment == World.Environment.NORMAL) {
+                str += "Overworld"
+            } else if(p.world.environment == World.Environment.NETHER) {
+                str += "Nether"
+            } else if(p.world.environment == World.Environment.THE_END) {
+                str += "The End"
+            } else {
+                str += "Custom"
             }
-            //시계 : 현재 시각 확인
-            else if(p.inventory.itemInMainHand.type == Material.CLOCK) {
-                var str = ""
-                val format = DecimalFormat("00")
-                var time = p.world.time
+            str += ' '
+            str += p.location.blockX.toString() + ' ' +
+                    p.location.blockY.toString() + ' ' +
+                    p.location.blockZ.toString()
 
-                str += format.format(((time/1000)+6)%24) + ':'
-                time %=1000
-                str += format.format(Math.floor(time/((50).toDouble()/(3).toDouble())))
+            server.broadcast(Component.text(str))
+            p.setCooldown(Material.COMPASS, 60)
+        }
 
-                p.sendMessage(str)
-            }
+        //시계 : 현재 시각 확인
+        if(p.inventory.itemInMainHand.type == Material.CLOCK &&
+                (e.action == Action.RIGHT_CLICK_AIR ||
+                e.action == Action.RIGHT_CLICK_BLOCK) &&
+                !p.hasCooldown(Material.CLOCK)) {
+            var str = ""
+            val format = DecimalFormat("00")
+            var time = p.world.time
+
+            str += format.format(((time/1000)+6)%24) + ':'
+            time %=1000
+            str += format.format(Math.floor(time/((50).toDouble()/(3).toDouble())))
+
+            p.sendMessage(str)
+            p.setCooldown(Material.CLOCK, 60)
         }
     }
 }

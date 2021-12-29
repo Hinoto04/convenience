@@ -48,7 +48,7 @@ class Recipe(private val plugin: JavaPlugin) {
         }
         player.discoverRecipes(recipeList)
     }
-
+    //꽁꽁 언 얼음
     private fun getPackedIce(): ShapedRecipe {
         val item = ItemStack(Material.PACKED_ICE)
         val key = NamespacedKey(this.plugin, "packed_ice")
@@ -59,7 +59,7 @@ class Recipe(private val plugin: JavaPlugin) {
         recipe.setIngredient('W', RecipeChoice.MaterialChoice(Tag.WOOL))
         return recipe
     }
-
+    //안장
     private fun getSaddle(): ShapedRecipe {
         val item = ItemStack(Material.SADDLE)
         val key = NamespacedKey(this.plugin, "saddle")
@@ -69,7 +69,7 @@ class Recipe(private val plugin: JavaPlugin) {
         recipe.setIngredient('S', Material.STRING)
         return recipe
     }
-
+    //이름표
     private fun getNameTag(): ShapedRecipe {
         val item = ItemStack(Material.NAME_TAG)
         val key = NamespacedKey(this.plugin, "name_tag")
@@ -79,7 +79,7 @@ class Recipe(private val plugin: JavaPlugin) {
         recipe.setIngredient('P', Material.PAPER)
         return recipe
     }
-
+    //마법이 부여된 황금 사과
     private fun getEnchantedGoldenApple(): ShapedRecipe {
         val item = ItemStack(Material.ENCHANTED_GOLDEN_APPLE)
         val key = NamespacedKey(this.plugin, "enchanted_golden_apple")
@@ -89,7 +89,7 @@ class Recipe(private val plugin: JavaPlugin) {
         recipe.setIngredient('A', Material.APPLE)
         return recipe
     }
-
+    //금 간 모루
     private fun getChippedAnvil(): ShapelessRecipe {
         val item = ItemStack(Material.CHIPPED_ANVIL)
         val key = NamespacedKey(this.plugin, "chipped_anvil")
@@ -98,7 +98,7 @@ class Recipe(private val plugin: JavaPlugin) {
         recipe.addIngredient(Material.IRON_INGOT)
         return recipe
     }
-
+    //모루
     private fun getAnvil(): ShapelessRecipe {
         val item = ItemStack(Material.ANVIL)
         val key = NamespacedKey(this.plugin, "anvil")

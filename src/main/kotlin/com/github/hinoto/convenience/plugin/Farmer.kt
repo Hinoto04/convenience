@@ -1,7 +1,5 @@
 package com.github.hinoto.convenience.plugin
 
-import net.kyori.adventure.text.Component
-import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.Sound
 import org.bukkit.block.Block

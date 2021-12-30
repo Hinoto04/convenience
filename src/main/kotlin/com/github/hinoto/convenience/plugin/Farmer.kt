@@ -53,7 +53,7 @@ class Farmer : Listener {
 
     private val compostChance = 0.3
 
-    fun tryCompost(item: ItemStack, composter: Block) {
+    private fun tryCompost(item: ItemStack, composter: Block) {
         if(item.type !in canCompost) {
             return
         }

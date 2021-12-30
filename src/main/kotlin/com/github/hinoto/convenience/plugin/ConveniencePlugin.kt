@@ -21,6 +21,9 @@ class ConveniencePlugin : JavaPlugin() {
 
         //기능성 아이템 관련 편의성 개선
         pm.registerEvents(FunctionItem(), this)
+
+        //최적화 관련 편의성
+        Optimization(this).init()
     }
 
     override fun onDisable() {

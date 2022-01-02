@@ -5,6 +5,7 @@ import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.World
 import org.bukkit.configuration.file.YamlConfiguration
+import org.bukkit.entity.EntityType
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.Action
@@ -160,7 +161,7 @@ class FunctionItem(private val plugin: JavaPlugin) : Listener {
             !p.isSneaking &&
             !p.hasCooldown(Material.CRAFTING_TABLE)) {
             e.isCancelled = true
-            val inv = Bukkit.createInventory(null, InventoryType.WORKBENCH, Component.text("내 손 안의 제작대"))
+            val inv = Bukkit.createInventory(p, InventoryType.WORKBENCH, Component.text("내 손 안의 제작대"))
             p.openInventory(inv)
         }
 
@@ -182,7 +183,18 @@ class FunctionItem(private val plugin: JavaPlugin) : Listener {
     //인벤토리 탈출 시 아이템 드랍
     @EventHandler
     fun onInventoryClose(e: InventoryCloseEvent) {
-        server.broadcast(Component.text(e.inventory.type.toString()))
-        server.broadcast(Component.text(e.inventory.holder.toString()))
+
+        //내 손 안의 제작대
+        if(e.inventory.type == InventoryType.WORKBENCH &&
+            e.inventory.location == null) {
+            e.inventory.contents?.let { contents ->
+                for(item in contents) {
+                    if(item != null) {
+                        e.player.world.dropItem(e.player.location, item)
+                    }
+                }
+            }
+        }
+        server.broadcast(Component.text(e.inventory.location.toString()))
     }
 }

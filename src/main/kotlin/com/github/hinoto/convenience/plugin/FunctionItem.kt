@@ -161,8 +161,9 @@ class FunctionItem(private val plugin: JavaPlugin) : Listener {
             !p.isSneaking &&
             !p.hasCooldown(Material.CRAFTING_TABLE)) {
             e.isCancelled = true
-            val inv = Bukkit.createInventory(p, InventoryType.WORKBENCH, Component.text("내 손 안의 제작대"))
-            p.openInventory(inv)
+            p.openWorkbench(p.location, true)
+            //val inv = Bukkit.createInventory(p, InventoryType.WORKBENCH, Component.text("내 손 안의 제작대"))
+            //p.openInventory(inv)
         }
 
         //상자 카트 : 서버 전체 인원이 공유하는 상자 열기
@@ -184,6 +185,7 @@ class FunctionItem(private val plugin: JavaPlugin) : Listener {
     @EventHandler
     fun onInventoryClose(e: InventoryCloseEvent) {
 
+        /*
         //내 손 안의 제작대
         if(e.inventory.type == InventoryType.WORKBENCH &&
             e.inventory.location == null) {
@@ -196,5 +198,6 @@ class FunctionItem(private val plugin: JavaPlugin) : Listener {
             }
         }
         server.broadcast(Component.text(e.inventory.location.toString()))
+        */
     }
 }

@@ -5,11 +5,10 @@ import org.bukkit.plugin.java.JavaPlugin
 
 class ConveniencePlugin : JavaPlugin() {
 
-    val recipe = Recipe(this)
+    private val recipe = Recipe(this)
+    private val functionItem = FunctionItem(this)
 
     override fun onEnable() {
-        logger.info("Convenience Plugin Enabled")
-
         val pm = Bukkit.getPluginManager()
 
         //농사 관련 편의성 개선
@@ -20,13 +19,18 @@ class ConveniencePlugin : JavaPlugin() {
         recipe.addRecipe()
 
         //기능성 아이템 관련 편의성 개선
-        pm.registerEvents(FunctionItem(), this)
+
+        functionItem.init()
+        pm.registerEvents(functionItem, this)
 
         //최적화 관련 편의성
         Optimization(this).init()
+
+        logger.info("Convenience Plugin Enabled")
     }
 
     override fun onDisable() {
+        functionItem.save()
         logger.info("Convenience Plugin Disabled")
     }
 }
